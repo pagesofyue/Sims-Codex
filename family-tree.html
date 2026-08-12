@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Tree Maker — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="family-tree">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond" style="background:var(--lavender)"></span>Genealogy</div>
+    <h1>Family Tree Maker</h1>
+    <p class="lede">Build out a household's lineage generation by generation. Saved automatically to this browser — export as JSON to back it up or share it.</p>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+  <form id="addSimForm" class="tree-toolbar">
+    <div class="field" style="flex:1; min-width:160px;">
+      <label for="simName">Sim name</label>
+      <input id="simName" type="text" placeholder="e.g. Bella Goth" required>
+    </div>
+    <div class="field">
+      <label for="parentA">Parent A</label>
+      <select id="parentA"></select>
+    </div>
+    <div class="field">
+      <label for="parentB">Parent B</label>
+      <select id="parentB"></select>
+    </div>
+    <div class="field">
+      <label for="spouseSel">Spouse</label>
+      <select id="spouseSel"></select>
+    </div>
+    <div class="field" style="flex:1; min-width:160px;">
+      <label for="simPhoto">Photo URL (optional)</label>
+      <input id="simPhoto" type="text" placeholder="Cloudinary link">
+    </div>
+    <button type="submit" class="btn">+ Add Sim</button>
+    <button type="button" id="exportTreeBtn" class="btn secondary">Export JSON</button>
+    <button type="button" id="clearTreeBtn" class="btn secondary">Clear tree</button>
+  </form>
+
+  <div id="tree-canvas-wrap">
+    <div id="tree-canvas-inner">
+      <svg id="tree-svg"></svg>
+      <div id="tree-rows"></div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script>initNav('family-tree');</script>
+<script src="assets/js/family-tree.js"></script>
+<script>initFamilyTree();</script>
+</body>
+</html>

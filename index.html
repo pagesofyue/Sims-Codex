@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sims Codex — Walkthroughs, Townies & Secret Lots</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+
+<div id="site-header"></div>
+
+<header class="hero">
+  <div class="hero-plumbob"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond"></span>The Sims 4 — Unofficial Field Guide</div>
+    <h1>Everything your household<br>never told you.</h1>
+    <p class="lede">
+      A living codex of original townies, secret lots, collections and careers —
+      pulled straight from a shared spreadsheet, so it updates the moment new
+      discoveries get logged.
+    </p>
+  </div>
+</header>
+
+<section class="section wrap">
+  <div class="eyebrow"><span class="diamond"></span>Start exploring</div>
+  <h2>Four ways into the Codex</h2>
+  <div class="feature-nav">
+    <a class="feature-card" href="towniepedia.html">
+      <span class="diamond"></span>
+      <h3>Towniepedia</h3>
+      <p>Every original townie, sorted by world — traits, households, and the lore fans have pieced together.</p>
+      <span class="go">Browse townies →</span>
+    </a>
+    <a class="feature-card" href="family-tree.html">
+      <span class="diamond" style="background:var(--lavender)"></span>
+      <h3>Family Tree Maker</h3>
+      <p>Build out a household's genealogy — generations, spouses, and lineage — and it's saved right in your browser.</p>
+      <span class="go">Build a tree →</span>
+    </a>
+    <a class="feature-card" href="secret-lots.html">
+      <span class="diamond" style="background:var(--coral)"></span>
+      <h3>Secret Lots</h3>
+      <p>Hidden worlds and unlockable lots, plus exactly how to trigger each one.</p>
+      <span class="go">Find the lots →</span>
+    </a>
+    <a class="feature-card" href="collections.html">
+      <span class="diamond" style="background:var(--mint)"></span>
+      <h3>Collections &amp; Skills</h3>
+      <p>Paintings, crystals, bicycle parts and more — what to look for and where it turns up.</p>
+      <span class="go">See collections →</span>
+    </a>
+    <a class="feature-card" href="forever-world.html">
+      <span class="diamond" style="background:var(--gold)"></span>
+      <h3>Forever World</h3>
+      <p>The one continuous save everything on this site is played from — download the latest version and see what's changed.</p>
+      <span class="go">Get the save →</span>
+    </a>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="eyebrow"><span class="diamond"></span>How this site works</div>
+  <h2>Built on a shared spreadsheet</h2>
+  <div class="card-grid" style="margin-top:24px;">
+    <div class="card">
+      <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--coral)"></span>Data</span>
+      <h3>Google Sheets</h3>
+      <p>Every list on this site — townies, lots, collections, careers — reads live from a published Google Sheet. Add a row, the site updates.</p>
+    </div>
+    <div class="card">
+      <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--coral)"></span>Media</span>
+      <h3>Cloudinary</h3>
+      <p>Screenshots and portraits are hosted on Cloudinary and referenced by URL in the sheet — no images committed to the repo.</p>
+    </div>
+    <div class="card">
+      <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--coral)"></span>Hosting</span>
+      <h3>GitHub Pages</h3>
+      <p>The whole site is static HTML/CSS/JS — no build step, no server — so it deploys straight from a GitHub repo.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script>initNav('home');</script>
+</body>
+</html>

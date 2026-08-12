@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Towniepedia — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="towniepedia">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond"></span>Every original townie</div>
+    <h1>Towniepedia</h1>
+    <p class="lede">The pre-made Sims that shipped with each world — grouped the way you'd actually find them in-game, not as a flat alphabetical list.</p>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+  <input class="search-input" id="townieSearch" type="text" placeholder="Search a name, household, or trait…" style="max-width:420px;">
+  <div class="jump-chips" id="jumpChips"></div>
+  <div id="townieSections"></div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script>
+  initNav('towniepedia');
+
+  const WORLD_COLORS = ["var(--gold)", "var(--mint)", "var(--coral)", "var(--lavender)"];
+
+  function slugify(str) {
+    return (str || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  }
+
+  function townieCard(row) {
+    return `
+      <div class="card">
+        ${row.image_url ? `<div class="thumb"><img src="${row.image_url}" alt="${row.name}" loading="lazy"></div>` : `<div class="thumb">no image yet</div>`}
+        <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--coral)"></span>${row.household || "No household listed"}</span>
+        <h3>${row.name}</h3>
+        <p>${row.bio || ""}</p>
+        <div class="tags">
+          ${(row.traits || "").split(",").filter(Boolean).map((t) => `<span class="tag">${t.trim()}</span>`).join("")}
+        </div>
+      </div>`;
+  }
+
+  (async function initTowniepedia() {
+    const sectionsEl = document.getElementById("townieSections");
+    const chipsEl = document.getElementById("jumpChips");
+    sectionsEl.innerHTML = '<div class="empty-state">Loading from the sheet…</div>';
+
+    let rows;
+    try {
+      rows = await DataStore.load("townies");
+    } catch (e) {
+      sectionsEl.innerHTML = '<div class="empty-state">Couldn\'t load townie data. Check assets/js/config.js.</div>';
+      console.error(e);
+      return;
+    }
+
+    const worlds = DataStore.uniqueValues(rows, "world").sort();
+
+    chipsEl.innerHTML = worlds
+      .map((w) => `<a class="pill" href="#${slugify(w)}">${w}</a>`)
+      .join("");
+
+    function render(filterQuery) {
+      const q = (filterQuery || "").toLowerCase();
+      const filteredRows = q
+        ? rows.filter((r) =>
+            ["name", "household", "traits", "bio"].some((f) => (r[f] || "").toLowerCase().includes(q))
+          )
+        : rows;
+
+      if (!filteredRows.length) {
+        sectionsEl.innerHTML = '<div class="empty-state">No townies match that search.</div>';
+        return;
+      }
+
+      sectionsEl.innerHTML = worlds
+        .map((world, i) => {
+          const worldRows = filteredRows.filter((r) => r.world === world);
+          if (!worldRows.length) return "";
+          const color = WORLD_COLORS[i % WORLD_COLORS.length];
+          return `
+            <div class="world-section" id="${slugify(world)}" style="--world-color:${color}">
+              <div class="world-band">
+                <span class="diamond" style="background:${color}"></span>
+                <h2>${world}</h2>
+                <span class="count">${worldRows.length} sim${worldRows.length === 1 ? "" : "s"}</span>
+              </div>
+              <div class="card-grid">${worldRows.map(townieCard).join("")}</div>
+            </div>`;
+        })
+        .join("");
+    }
+
+    render("");
+
+    document.getElementById("townieSearch").addEventListener("input", (e) => render(e.target.value));
+
+    // deep-link support: towniepedia.html?world=Willow%20Creek scrolls to that section
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("world") || params.get("filter");
+    if (target) {
+      const el = document.getElementById(slugify(target));
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  })();
+</script>
+</body>
+</html>

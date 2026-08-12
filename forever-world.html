@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever World — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="forever-world">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond" style="background:var(--mint)"></span>The Save File</div>
+    <h1>Forever World</h1>
+    <p class="lede">
+      One continuous save, played forever — every household, generation, and secret lot
+      on this site lives inside it. Download the latest version below, or edit this
+      section directly if you'd rather write your own intro.
+    </p>
+    <div id="downloadCta"></div>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+  <div class="eyebrow"><span class="diamond"></span>Version log</div>
+  <h2>What's changed</h2>
+  <div id="saveLog" class="save-log"></div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script>
+  initNav('forever-world');
+
+  (async function renderSaveLog() {
+    const logEl = document.getElementById("saveLog");
+    const ctaEl = document.getElementById("downloadCta");
+    logEl.innerHTML = '<div class="empty-state">Loading from the sheet…</div>';
+
+    let rows;
+    try {
+      rows = await DataStore.load("saveVersions");
+    } catch (e) {
+      logEl.innerHTML = '<div class="empty-state">Couldn\'t load the version log. Check assets/js/config.js.</div>';
+      console.error(e);
+      return;
+    }
+
+    if (!rows.length) {
+      logEl.innerHTML = '<div class="empty-state">No versions logged yet.</div>';
+      return;
+    }
+
+    // newest first — sort by version string if numeric-ish, else keep sheet order reversed
+    const sorted = [...rows].reverse();
+    const latest = sorted[0];
+
+    ctaEl.innerHTML = latest.download_url
+      ? `<a class="download-cta" href="${latest.download_url}">⬇ Download v${latest.version}</a>`
+      : `<span class="download-cta disabled">⬇ Add a download_url to the latest row</span>`;
+
+    logEl.innerHTML = sorted
+      .map(
+        (row, i) => `
+        <div class="save-log-item ${i === 0 ? "latest" : ""}">
+          <div class="row-top">
+            <span class="version">v${row.version}${i === 0 ? ' <span class="badge-latest">Latest</span>' : ""}</span>
+            <span class="date">${row.date || ""}</span>
+          </div>
+          <p>${row.notes || ""}</p>
+          ${row.download_url ? `<a class="download-cta" style="margin-top:14px; padding:8px 16px; font-size:0.75rem;" href="${row.download_url}">⬇ Download this version</a>` : ""}
+        </div>`
+      )
+      .join("");
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Photos — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="upload-photos">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond" style="background:var(--coral)"></span>Add a photo</div>
+    <h1>Upload Photos</h1>
+    <p class="lede">
+      Two ways to get an image onto the site: paste an existing link straight into the
+      <code style="font-family:var(--font-mono); background:rgba(243,239,224,0.1); padding:2px 6px; border-radius:4px;">image_url</code>
+      column in your Google Sheet, or drop a photo below to get a fresh link.
+    </p>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+
+  <div class="dropzone" id="dropZone">
+    <div class="diamond" style="width:16px;height:16px; margin:0 auto 12px;"></div>
+    <h3>Drop a photo here, or click to choose one</h3>
+    <p>It uploads straight to your Cloudinary account. Once it's done, copy the link and paste it into the matching row's <code style="font-family:var(--font-mono);">image_url</code> cell in your Sheet.</p>
+    <input type="file" id="fileInput" accept="image/*" multiple hidden>
+  </div>
+
+  <div class="setup-notice" id="setupNotice">
+    <h3>One-time setup needed</h3>
+    <p>The uploader isn't connected yet — you can still add photos by pasting Cloudinary (or any) links directly into your Sheet's <code>image_url</code> column. To turn on drag-and-drop uploads here too:</p>
+    <ol>
+      <li>Sign up free at <strong>cloudinary.com</strong> and note your <strong>Cloud name</strong> (shown on the Dashboard).</li>
+      <li>Go to <strong>Settings → Upload</strong>, scroll to "Upload presets," and click <strong>Add upload preset</strong>.</li>
+      <li>Set <strong>Signing Mode</strong> to <strong>Unsigned</strong>, save, and note the preset name.</li>
+      <li>Open <code>assets/js/config.js</code> and fill in <code>CLOUDINARY_CONFIG.cloudName</code> and <code>CLOUDINARY_CONFIG.uploadPreset</code>.</li>
+    </ol>
+  </div>
+
+  <div class="upload-list" id="uploadList"></div>
+
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/uploader.js"></script>
+<script>
+  initNav('upload-photos');
+  initUploader({
+    dropZoneId: "dropZone",
+    fileInputId: "fileInput",
+    listId: "uploadList",
+    setupNoticeId: "setupNotice",
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="careers">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond" style="background:var(--lavender)"></span>Active &amp; Career Tracks</div>
+    <h1>Careers</h1>
+    <p class="lede">What each career actually involves, and the full promotion track from bottom to top.</p>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+  <div class="toolbar" id="careerToolbar"></div>
+  <div id="careerGrid"></div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+  initNav('careers');
+
+  initGridPage({
+    dataKey: "careers",
+    gridId: "careerGrid",
+    toolbarId: "careerToolbar",
+    filterField: "type",
+    filterParam: "filter",
+    searchFields: ["name", "description", "track"],
+    emptyMessage: "No careers logged yet.",
+    renderCard: (row) => `
+      <div class="card">
+        ${thumbHtml(row.image_url, row.name)}
+        <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--lavender)"></span>${row.type || ""}</span>
+        <h3>${row.name}</h3>
+        <p>${row.description || ""}</p>
+        <p style="font-family:var(--font-mono); font-size:0.75rem; opacity:0.7;">${row.track || ""}</p>
+      </div>`,
+  });
+</script>
+</body>
+</html>

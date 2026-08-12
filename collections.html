@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collections — Sims Codex</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="collections">
+
+<div id="site-header"></div>
+
+<header class="hero" style="padding:60px 0 20px;">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="diamond" style="background:var(--mint)"></span>Skills &amp; Collectibles</div>
+    <h1>Collections</h1>
+    <p class="lede">Paintings, crystals, bicycle parts and everything else worth hunting down — grouped by category.</p>
+  </div>
+</header>
+
+<section class="wrap section" style="padding-top:0;">
+  <div class="toolbar" id="collectionToolbar"></div>
+  <div id="collectionGrid"></div>
+</section>
+
+<div id="site-footer" class="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+  initNav('collections');
+
+  initGridPage({
+    dataKey: "collections",
+    gridId: "collectionGrid",
+    toolbarId: "collectionToolbar",
+    filterField: "category",
+    filterParam: "filter",
+    searchFields: ["item_name", "category", "found_where"],
+    emptyMessage: "No collection items logged yet.",
+    renderCard: (row) => `
+      <div class="card">
+        ${thumbHtml(row.image_url, row.item_name)}
+        <span class="meta"><span class="diamond" style="width:6px;height:6px;background:var(--mint)"></span>${row.category || ""}</span>
+        <h3>${row.item_name}</h3>
+        <p>${row.found_where || "Location not documented yet."}</p>
+      </div>`,
+  });
+</script>
+</body>
+</html>
