@@ -1,0 +1,7 @@
+id,category,item_name,found_where,image_url
+c001,Skill: Paintings,Sunset Study,"Painted at Painting skill level 3+, best with high Creativity moodlet",
+c002,Skill: Paintings,Perfect Portrait,"Painted from a live model at Painting skill level 8+",
+c003,Collections: Bicycle Parts,Rusty Chain,"Found while cycling through Willow Creek or Britechester trails",
+c004,Collections: Bicycle Parts,Golden Handlebars,"Rare find while cycling — higher chance at higher cycling skill",
+c005,Collections: Crystals,Amethyst,"Found rock climbing or via geode cracking",
+c006,Collections: Crystals,Moonstone,"Found at night while exploring Granite Falls",
