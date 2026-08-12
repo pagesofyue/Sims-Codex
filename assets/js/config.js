@@ -48,6 +48,6 @@ const SHEET_CONFIG = {
  * links pasted directly into the Sheet.
  */
 const CLOUDINARY_CONFIG = {
-  cloudName: "",     // e.g. "dabc123xy"
-  uploadPreset: "",  // e.g. "sims_codex_unsigned"
+  cloudName: "izmakrk2",
+  uploadPreset: "The Sims4",
 };

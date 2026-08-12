@@ -48,7 +48,7 @@ Create one spreadsheet with a tab per section. Use these exact column headers
 - `world` on the Townies tab groups Towniepedia into sections, and drives the **Towniepedia** dropdown.
 - `category` on Collections drives the **Collections** dropdown (e.g. "Skill: Paintings").
 - `name` on Careers/SecretLots drives those dropdowns.
-- **SaveVersions** feeds the **Forever World** page — newest row (bottom of the sheet) is treated as the current version and gets the "Download latest" button.
+- **SaveVersions** feeds the **Forever World** page — it's an update log (new townies, new houses, milestones), not a file download. `download_url` is optional per row, for the rare case you do want to link something.
 
 For each tab: **File → Share → Publish to web** → select the specific tab →
 format **Comma-separated values (.csv)** → **Publish**. Copy the resulting URL.

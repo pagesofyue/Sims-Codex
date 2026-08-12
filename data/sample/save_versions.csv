@@ -1,5 +1,5 @@
 id,version,date,notes,download_url
-v001,1.0,2024-03-02,"Initial founding save — four starter households moved into Willow Creek and Oasis Springs.",
-v002,1.1,2024-05-18,"Added Britechester university save-state; first generation of Goth legacy aged into young adults.",
-v003,1.2,2024-09-30,"Cleaned up corrupted lot after a failed build-mode mod; restored from backup. All secret lots re-verified.",
-v004,2.0,2025-02-14,"Major save milestone — 10 generations reached. Full world save re-uploaded.",
+v001,1.0,2024-03-02,"Founding update — four starter households moved into Willow Creek and Oasis Springs.",
+v002,1.1,2024-05-18,"New batch of townies added to Britechester; first generation of the Goth legacy aged into young adults.",
+v003,1.2,2024-09-30,"Built three new houses in Willow Creek; re-verified all secret lots after a build-mode cleanup.",
+v004,2.0,2025-02-14,"Major milestone — 10 generations reached, plus a fresh wave of new townies across every world.",
