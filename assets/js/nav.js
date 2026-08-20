@@ -17,7 +17,6 @@ const NAV_LINKS = [
   { label: "Family Tree", href: "family-tree.html" },
   { label: "Collections", href: "collections.html", dropdown: "collections", labelField: "category" },
   { label: "Careers", href: "careers.html", dropdown: "careers", labelField: "name" },
-  { label: "Upload Photos", href: "upload.html" },
   { label: "Forever World", href: "forever-world.html" },
   { label: "Towniepedia", href: "towniepedia.html", dropdown: "townies", labelField: "world" },
 ];

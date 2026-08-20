@@ -21,6 +21,7 @@
 <section class="wrap section" style="padding-top:0;">
   <input class="search-input" id="townieSearch" type="text" placeholder="Search a name, household, or trait…" style="max-width:420px;">
   <div class="jump-chips" id="jumpChips"></div>
+  <div id="addTownieHost" style="margin-bottom:32px;"></div>
   <div id="townieSections"></div>
 </section>
 
@@ -30,8 +31,23 @@
 <script src="assets/js/config.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/nav.js"></script>
+<script src="assets/js/uploader.js"></script>
+<script src="assets/js/add-entry.js"></script>
 <script>
   initNav('towniepedia');
+
+  initAddEntryForm({
+    containerId: "addTownieHost",
+    entryLabel: "a Townie",
+    tabName: "Townies",
+    fields: [
+      { key: "name", label: "Name", required: true },
+      { key: "world", label: "World", required: true, placeholder: "e.g. Willow Creek" },
+      { key: "household", label: "Household" },
+      { key: "traits", label: "Traits (comma separated)", placeholder: "e.g. Insane, Loves Outdoors" },
+      { key: "bio", label: "Bio", type: "textarea" },
+    ],
+  });
 
   const WORLD_COLORS = ["var(--gold)", "var(--mint)", "var(--coral)", "var(--lavender)"];
 

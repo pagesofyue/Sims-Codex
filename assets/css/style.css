@@ -348,15 +348,6 @@ p{line-height:1.65; opacity:0.9;}
 .dropzone h3{margin-bottom:6px;}
 .dropzone p{font-size:0.85rem; opacity:0.65; margin:0;}
 
-.setup-notice{
-  display:none; background:var(--parchment); color:var(--text-dark);
-  border-radius:var(--radius); padding:24px; box-shadow:var(--shadow);
-}
-.setup-notice ol{margin:14px 0 0; padding-left:20px; font-size:0.92rem; line-height:1.7;}
-.setup-notice code{
-  background:rgba(0,0,0,0.06); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:0.85em;
-}
-
 .upload-list{display:flex; flex-direction:column; gap:12px; margin-top:24px;}
 .upload-row{
   display:flex; align-items:center; gap:14px;

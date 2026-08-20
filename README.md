@@ -70,20 +70,29 @@ const SHEET_CONFIG = {
 Leave any entry pointing at `data/sample/...csv` and that section keeps using
 the built-in sample data.
 
-## 3. Add images
+## 3. Add entries and photos directly from the site
 
-Two ways to do this, mix and match freely:
+Each of Towniepedia, Secret Lots, Collections and Careers has a small
+**"+ Add"** button at the top of the page. Click it, fill in the fields,
+optionally drop in a photo, and submit — it writes a new row straight into
+the matching tab of your Google Sheet, photo included.
 
-- **Paste a link.** Any hosted image URL works — Cloudinary, Imgur, wherever.
-  Paste it into the `image_url` column for that row.
-- **Use the built-in uploader.** Open `upload.html` on the live site (also
-  in the nav as "Upload Photos"), drag a photo in, and it uploads straight
-  to your Cloudinary account and hands you back a link to paste into the
-  Sheet. One-time setup (a few minutes): sign up free at cloudinary.com,
-  create an **unsigned** upload preset under Settings → Upload, then paste
-  your cloud name and preset name into `CLOUDINARY_CONFIG` in
-  `assets/js/config.js`. Until that's filled in, the uploader page just
-  shows those setup steps instead.
+This needs two one-time setups:
+
+- **Cloudinary**, for the photo upload step. Sign up free at
+  cloudinary.com, create an **unsigned** upload preset under
+  Settings → Upload, then paste your cloud name and preset name into
+  `CLOUDINARY_CONFIG` in `assets/js/config.js`.
+- **A small Google Apps Script**, so the site can actually write the new
+  row into your Sheet. Open your Sheet → Extensions → Apps Script, paste
+  in the contents of `data/apps-script/Code.gs`, set an `EDIT_KEY` word of
+  your choosing near the top, then Deploy → New deployment → Web app
+  (Execute as: Me, Who has access: Anyone). Paste the resulting URL and
+  your edit key into `ADD_ENTRY_CONFIG` in `assets/js/config.js`.
+
+Until both are filled in, the "+ Add" forms simply don't appear — you can
+always fall back to editing the Sheet directly and pasting image links
+(Cloudinary, Imgur, wherever) into the `image_url` column by hand.
 
 No image files are ever committed to the repo either way.
 

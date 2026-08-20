@@ -19,6 +19,7 @@
 </header>
 
 <section class="wrap section" style="padding-top:0;">
+  <div id="addCareerHost" style="margin-bottom:32px;"></div>
   <div class="toolbar" id="careerToolbar"></div>
   <div id="careerGrid"></div>
 </section>
@@ -30,8 +31,22 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/pages.js"></script>
+<script src="assets/js/uploader.js"></script>
+<script src="assets/js/add-entry.js"></script>
 <script>
   initNav('careers');
+
+  initAddEntryForm({
+    containerId: "addCareerHost",
+    entryLabel: "a Career",
+    tabName: "Careers",
+    fields: [
+      { key: "name", label: "Career name", required: true },
+      { key: "type", label: "Type", placeholder: "e.g. Active Career" },
+      { key: "description", label: "Description", type: "textarea" },
+      { key: "track", label: "Promotion track", type: "textarea", placeholder: "A -> B -> C" },
+    ],
+  });
 
   initGridPage({
     dataKey: "careers",

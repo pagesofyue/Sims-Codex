@@ -19,6 +19,7 @@
 </header>
 
 <section class="wrap section" style="padding-top:0;">
+  <div id="addCollectionHost" style="margin-bottom:32px;"></div>
   <div class="toolbar" id="collectionToolbar"></div>
   <div id="collectionGrid"></div>
 </section>
@@ -30,8 +31,21 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/pages.js"></script>
+<script src="assets/js/uploader.js"></script>
+<script src="assets/js/add-entry.js"></script>
 <script>
   initNav('collections');
+
+  initAddEntryForm({
+    containerId: "addCollectionHost",
+    entryLabel: "a Collection Item",
+    tabName: "Collections",
+    fields: [
+      { key: "category", label: "Category", required: true, placeholder: "e.g. Skill: Paintings" },
+      { key: "item_name", label: "Item name", required: true },
+      { key: "found_where", label: "Found where", type: "textarea" },
+    ],
+  });
 
   initGridPage({
     dataKey: "collections",

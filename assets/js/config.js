@@ -30,9 +30,9 @@ const SHEET_CONFIG = {
 /**
  * CLOUDINARY_CONFIG
  * -----------------
- * Powers the "Upload Photos" page (upload.html), which lets you drag a
- * photo in and get back a hosted link — no need to open Cloudinary's
- * dashboard by hand.
+ * Powers the photo-attach step inside each "+ Add" form (Towniepedia,
+ * Secret Lots, Collections, Careers) — drop in a photo and it uploads to
+ * your Cloudinary account, no separate dashboard visit needed.
  *
  * One-time setup (a few minutes, only ever done once):
  *   1. Sign up free at cloudinary.com. On your Dashboard, note your
@@ -43,11 +43,41 @@ const SHEET_CONFIG = {
  *      it's given (or set your own).
  *   4. Paste both values below.
  *
- * Until you do, the Upload Photos page will show a setup reminder instead
- * of the uploader — everything else on the site still works fine off
- * links pasted directly into the Sheet.
+ * Until you do, the photo-attach field inside each "+ Add" form simply
+ * won't upload — everything else on the site still works fine off links
+ * pasted directly into the Sheet.
  */
 const CLOUDINARY_CONFIG = {
   cloudName: "izmakrk2",
   uploadPreset: "The Sims4",
+};
+
+/**
+ * ADD_ENTRY_CONFIG
+ * ----------------
+ * Powers the "+ Add" forms on Towniepedia, Secret Lots, Collections and
+ * Careers — fill in the fields, attach a photo, submit, and it writes a
+ * new row straight into the matching tab of your Google Sheet.
+ *
+ * This needs a tiny Google Apps Script "receiver" living inside your
+ * Sheet (free, no separate hosting). One-time setup:
+ *   1. Open your Google Sheet → Extensions → Apps Script.
+ *   2. Delete anything in the editor and paste in the contents of
+ *      data/apps-script/Code.gs (included in this project).
+ *   3. Near the top of that file, set EDIT_KEY to any word/phrase you like
+ *      — this is a simple shared password so random visitors can't submit
+ *      entries, just people you've shared the word with. It is NOT secure,
+ *      just a light deterrent, since anyone with the URL could still see it.
+ *   4. Click Deploy → New deployment → type: Web app.
+ *      Execute as: Me. Who has access: Anyone. Click Deploy, and allow
+ *      the permissions it asks for (it's your own script on your own sheet).
+ *   5. Copy the Web app URL it gives you and paste it below as scriptUrl.
+ *   6. Set editKey below to the same word you set in step 3.
+ *
+ * Until scriptUrl is filled in, the "+ Add" forms stay hidden and the
+ * site works exactly as before — nothing breaks in the meantime.
+ */
+const ADD_ENTRY_CONFIG = {
+  scriptUrl: "",  // e.g. "https://script.google.com/macros/s/AKfycb.../exec"
+  editKey: "",    // e.g. "plumbob"
 };
